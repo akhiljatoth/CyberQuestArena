@@ -95,11 +95,11 @@ Here are some glimpses of CyberQuestArena:
 
 - **Home Page**:
 
-  ![Home Page](assests\login.png)
+  ![Home Page](assests/login.png)
 
 - **Challenge Dashboard**:
 
-  ![Challenge Dashboard](assests\banner.png)
+  ![Challenge Dashboard](assests/banner.png)
 
 
 ## Contributing
