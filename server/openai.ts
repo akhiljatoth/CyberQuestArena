@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import type { Challenge } from "@shared/schema";
 
-const genAI = new GoogleGenerativeAI("AIzaSyD7eD7YQFVUL5OYOmLt6UHjwgDBYhy0RvE");
+const genAI = new GoogleGenerativeAI("Gemini");
 
 export async function generateChallenge(
   topic: string,
