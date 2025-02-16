@@ -4,7 +4,7 @@ import { setupAuth } from "./auth";
 import { storage } from "./storage";
 import { insertChallengeSchema, insertSubmissionSchema } from "@shared/schema";
 import { ZodError } from "zod";
-import { generateChallenge } from "./openai";
+import { generateChallenge, getChatResponse } from "./openai";
 
 function requireAuth(req: Request, res: Response, next: Function) {
   if (!req.isAuthenticated()) {
@@ -56,10 +56,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const challenge = await generateChallenge(topic, difficulty);
-      const created = await storage.createChallenge({
-        ...challenge,
-        aiGenerated: true
-      });
+      const created = await storage.createChallenge(challenge);
       res.status(201).json(created);
     } catch (error) {
       console.error("Challenge generation failed:", error);
@@ -128,6 +125,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const topUsers = await storage.getTopUsers(10);
     res.json(topUsers);
   });
+
+  // AI Chat Route
+  app.post("/api/chat", requireAuth, async (req, res) => {
+    try {
+      const { message } = req.body;
+      if (!message) {
+        return res.status(400).json({
+          message: "Message is required"
+        });
+      }
+
+      const response = await getChatResponse(message);
+      res.json(response);
+    } catch (error) {
+      console.error("Chat response failed:", error);
+      res.status(500).json({
+        message: "Failed to get response from AI assistant. Please try again."
+      });
+    }
+  });
+
 
   const httpServer = createServer(app);
   return httpServer;

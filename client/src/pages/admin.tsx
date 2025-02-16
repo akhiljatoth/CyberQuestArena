@@ -163,10 +163,14 @@ export default function AdminPage() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="web">Web</SelectItem>
+                            <SelectItem value="web">Web Security</SelectItem>
                             <SelectItem value="crypto">Cryptography</SelectItem>
-                            <SelectItem value="forensics">Forensics</SelectItem>
-                            <SelectItem value="pwn">Binary Exploitation</SelectItem>
+                            <SelectItem value="movies">Movies & TV</SelectItem>
+                            <SelectItem value="sports">Sports</SelectItem>
+                            <SelectItem value="tech">Technology</SelectItem>
+                            <SelectItem value="gaming">Gaming</SelectItem>
+                            <SelectItem value="science">Science</SelectItem>
+                            <SelectItem value="history">History</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -245,7 +249,7 @@ export default function AdminPage() {
                           <FormControl>
                             <Input
                               {...field}
-                              placeholder="e.g., SQL injection, XSS, buffer overflow"
+                              placeholder="e.g., Marvel movies, World Cup history, latest tech trends"
                             />
                           </FormControl>
                           <FormMessage />

@@ -25,11 +25,11 @@ export async function generateChallenge(
         {
           role: "system",
           content:
-            "You are a cybersecurity expert creating CTF challenges. Generate a challenge that is both educational and engaging. The response should be a JSON object with title, description, category, points, and answer fields. The description should include clear instructions and any necessary context, but should not reveal the answer. The answer should be specific and unambiguous.",
+            "You are an expert at creating engaging trivia and puzzle challenges. Generate challenges across various categories like movies, sports, technology, and general knowledge. The challenge should be fun, educational, and include a clear question with a specific answer. The response should be a JSON object with title, description, category, points, answer, and hint fields. Make the description engaging and the hint helpful but not too revealing.",
         },
         {
           role: "user",
-          content: `Create a ${difficulty} difficulty challenge about ${topic}. The challenge should be solvable without external tools.`,
+          content: `Create a ${difficulty} difficulty challenge about ${topic}. Make it engaging and fun!`,
         },
       ],
       response_format: { type: "json_object" },
@@ -42,17 +42,49 @@ export async function generateChallenge(
 
     const result = JSON.parse(content);
 
-    // Validate and format the response
     return {
       title: result.title,
       description: result.description,
       category: result.category.toLowerCase(),
       points: result.points || difficultyPoints[difficulty],
       answer: result.answer,
+      hint: result.hint,
       aiGenerated: true,
     };
   } catch (error) {
     console.error("Failed to generate challenge:", error);
     throw new Error("Failed to generate challenge with OpenAI");
+  }
+}
+
+// Add AI Chat Assistant
+export async function getChatResponse(
+  message: string
+): Promise<{ response: string }> {
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are a helpful CTF assistant. You can provide hints and guidance for solving challenges, but never give direct answers. Encourage learning and understanding rather than just providing solutions.",
+        },
+        {
+          role: "user",
+          content: message,
+        },
+      ],
+    });
+
+    const content = response.choices[0].message.content;
+    if (!content) {
+      throw new Error("No content received from OpenAI");
+    }
+
+    return { response: content };
+  } catch (error) {
+    console.error("Failed to get chat response:", error);
+    throw new Error("Failed to get response from AI assistant");
   }
 }

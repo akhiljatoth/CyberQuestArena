@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import AiChat from "@/components/ui/ai-chat";
 
 export default function HomePage() {
   const { user } = useAuth();
@@ -144,7 +145,7 @@ export default function HomePage() {
                   <Flag className="h-12 w-12 text-muted-foreground mb-4" />
                   <h3 className="text-xl font-semibold mb-2">No Challenges Available</h3>
                   <p className="text-muted-foreground">
-                    {category === "all" 
+                    {category === "all"
                       ? "Check back soon or contact an admin to add some challenges!"
                       : "No challenges found in this category. Try another category."}
                   </p>
@@ -210,9 +211,9 @@ export default function HomePage() {
               )}
             </div>
           </div>
-
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 space-y-6">
             <Leaderboard users={leaderboard || []} />
+            <AiChat />
           </div>
         </div>
       </div>
