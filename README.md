@@ -1,6 +1,6 @@
 # CyberQuestArena
 
-![CyberQuestArena Banner](assests\banner.png)
+![CyberQuestArena Banner](assets/banner.png)
 
 **CyberQuestArena** is an innovative Capture The Flag (CTF) platform designed for cybersecurity enthusiasts and professionals. It offers a diverse range of challenges, from traditional coding and exploitation tasks to unique puzzles involving songs and movies. The platform leverages the ChatGPT API to dynamically generate questions, ensuring a fresh and engaging experience for users.
 
