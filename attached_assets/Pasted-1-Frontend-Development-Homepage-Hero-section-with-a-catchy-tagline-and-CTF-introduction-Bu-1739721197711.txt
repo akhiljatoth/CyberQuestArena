@@ -1,0 +1,100 @@
+1. Frontend Development
+Homepage:
+
+Hero section with a catchy tagline and CTF introduction.
+
+Buttons for login, signup, and exploring challenges.
+
+Challenge Categories Page:
+
+Cards for each category (Coding, Finding, Multimedia, etc.).
+
+Filter and search functionality.
+
+Challenge Details Page:
+
+Display the challenge description, points, and submission form.
+
+Include a "Request Hint" button.
+
+Leaderboard Page:
+
+Table displaying top players with their scores.
+
+User Profile Page:
+
+Display user stats, solved challenges, and achievements.
+
+Admin Panel:
+
+Forms for adding/editing challenges.
+
+Dashboard for monitoring user activity.
+
+2. Backend Development
+User Authentication:
+
+Use JWT (JSON Web Tokens) for secure login.
+
+Challenge Management:
+
+CRUD operations for challenges.
+
+Store challenges in the database with fields like title, description, category, points, flag, etc.
+
+Flag Submission:
+
+API endpoint to validate submitted flags.
+
+ChatGPT Integration:
+
+API endpoint to send prompts to ChatGPT and receive generated questions.
+
+Store generated questions in the database for approval.
+
+Leaderboard Logic:
+
+Calculate and update user scores based on solved challenges.
+
+3. ChatGPT API Integration
+Use the OpenAI API to generate questions dynamically.
+
+Example prompt for coding challenges:
+
+Copy
+"Generate a medium-level reverse engineering challenge in C programming. Provide a description and the correct output as the flag."
+Store the generated questions in the database for admins to review and approve.
+
+4. Database Design
+Users Table:
+
+id, username, email, password_hash, role, points, created_at.
+
+Challenges Table:
+
+id, title, description, category, points, flag, hint, created_by, created_at.
+
+Submissions Table:
+
+id, user_id, challenge_id, submitted_flag, is_correct, submitted_at.
+
+Leaderboard Table:
+
+user_id, total_points, last_updated.
+
+5. Design Inspiration
+CTF Sites:
+
+Hack The Box
+
+CTFtime
+
+OverTheWire
+
+UI Elements:
+
+Dark theme with neon green/blue accents.
+
+Glitch effects on buttons and text.
+
+Typing animations for challenge descriptions.

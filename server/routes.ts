@@ -50,8 +50,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { topic, difficulty } = req.body;
 
       if (!topic || !["easy", "medium", "hard"].includes(difficulty)) {
-        return res.status(400).json({ 
-          message: "Invalid request. Topic is required and difficulty must be 'easy', 'medium', or 'hard'." 
+        return res.status(400).json({
+          message: "Invalid request. Topic is required and difficulty must be 'easy', 'medium', or 'hard'."
         });
       }
 
@@ -63,10 +63,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(created);
     } catch (error) {
       console.error("Challenge generation failed:", error);
-      res.status(500).json({ 
-        message: "Failed to generate challenge. Please try again or contact support if the issue persists." 
+      res.status(500).json({
+        message: "Failed to generate challenge. Please try again or contact support if the issue persists."
       });
     }
+  });
+
+  // Add hint route
+  app.post("/api/challenges/:id/hint", requireAuth, async (req, res) => {
+    const challenge = await storage.getChallenge(parseInt(req.params.id));
+    if (!challenge) {
+      return res.status(404).json({ message: "Challenge not found" });
+    }
+
+    if (!challenge.hint) {
+      return res.status(404).json({ message: "No hint available for this challenge" });
+    }
+
+    res.json({ hint: challenge.hint });
   });
 
   // Submission routes
@@ -76,7 +90,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...req.body,
         userId: req.user.id
       });
-      
+
       const challenge = await storage.getChallenge(submission.challengeId);
       if (!challenge) {
         res.status(404).json({ message: "Challenge not found" });

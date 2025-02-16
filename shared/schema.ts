@@ -17,6 +17,7 @@ export const challenges = pgTable("challenges", {
   category: text("category").notNull(),
   points: integer("points").notNull(),
   answer: text("answer").notNull(),
+  hint: text("hint"),
   aiGenerated: boolean("ai_generated").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow()
 });

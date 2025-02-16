@@ -10,23 +10,23 @@ export interface IStorage {
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUserScore(userId: number, points: number): Promise<void>;
-  
+
   // Challenge operations
   createChallenge(challenge: Omit<Challenge, "id" | "createdAt">): Promise<Challenge>;
   getChallenge(id: number): Promise<Challenge | undefined>;
   getAllChallenges(): Promise<Challenge[]>;
-  
+
   // Submission operations
   createSubmission(submission: Omit<Submission, "id" | "submittedAt">): Promise<Submission>;
   getSubmissionsByUser(userId: number): Promise<Submission[]>;
-  
+
   // Entertainment operations
   createEntertainmentContent(content: Omit<Entertainment, "id">): Promise<Entertainment>;
   getAllEntertainmentContent(): Promise<Entertainment[]>;
-  
+
   // Leaderboard
   getTopUsers(limit: number): Promise<User[]>;
-  
+
   sessionStore: session.Store;
 }
 
@@ -56,6 +56,7 @@ export class MemStorage implements IStorage {
       category: "web",
       points: 50,
       answer: "CTF{welcome_hacker}",
+      hint: "Right-click on the page and select 'View Page Source'. The flag is hidden in an HTML comment.",
       aiGenerated: false,
       createdAt: new Date()
     });
@@ -67,6 +68,7 @@ export class MemStorage implements IStorage {
       category: "crypto",
       points: 100,
       answer: "CTF{base64_is_not_encryption}",
+      hint: "Base64 is a common encoding method. Try using an online base64 decoder!",
       aiGenerated: false,
       createdAt: new Date()
     });
@@ -78,6 +80,7 @@ export class MemStorage implements IStorage {
       category: "crypto",
       points: 150,
       answer: "U3yy0_PGS_Cy4l3e",
+      hint: "ROT13 is a simple substitution cipher that replaces each letter with the letter 13 positions after it in the alphabet.",
       aiGenerated: false,
       createdAt: new Date()
     });
