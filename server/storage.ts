@@ -47,6 +47,42 @@ export class MemStorage implements IStorage {
     this.sessionStore = new MemoryStore({
       checkPeriod: 86400000
     });
+
+    // Add some initial challenges
+    this.challenges.set(1, {
+      id: 1,
+      title: "Welcome Hacker",
+      description: "Your first challenge! Find the secret flag in the page source. Hint: View the page source (Ctrl+U or Cmd+U) and look for a comment containing 'flag'.",
+      category: "web",
+      points: 50,
+      answer: "CTF{welcome_hacker}",
+      aiGenerated: false,
+      createdAt: new Date()
+    });
+
+    this.challenges.set(2, {
+      id: 2,
+      title: "Basic Encryption",
+      description: "Can you decode this message? It's encoded in base64: Q1RGe2Jhc2U2NF9pc19ub3RfZW5jcnlwdGlvbn0=",
+      category: "crypto",
+      points: 100,
+      answer: "CTF{base64_is_not_encryption}",
+      aiGenerated: false,
+      createdAt: new Date()
+    });
+
+    this.challenges.set(3, {
+      id: 3,
+      title: "Hidden Message",
+      description: "There's a secret message hidden in this string: 'H3ll0_CTF_Pl4y3r'. Convert it to ROT13!",
+      category: "crypto",
+      points: 150,
+      answer: "U3yy0_PGS_Cy4l3e",
+      aiGenerated: false,
+      createdAt: new Date()
+    });
+
+    this.currentId.challenges = 4; // Update the counter since we added 3 challenges
   }
 
   async getUser(id: number): Promise<User | undefined> {
